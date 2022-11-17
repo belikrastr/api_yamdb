@@ -18,7 +18,19 @@ class GenreAdmin(admin.ModelAdmin):
 
 @admin.register(Title)
 class TitleAdmin(admin.ModelAdmin):
-    list_display = ('name', 'year', 'category', 'description')
+    list_display = ('id', 'name', 'year', 'category', 'description')
     search_fields = ('name',)
     list_filter = ('year', 'category', 'genre')
+    empty_value_display = '-empty-'
+
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('id', 'text', 'author', 'pub_date', 'title')
+    search_fields = ('text',)
+    list_filter = ('author',)
+    empty_value_display = '-empty-'
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'text', 'author', 'title', 'review')
+    search_fields = ('text',)
+    list_filter = ('review', 'author')
     empty_value_display = '-empty-'
