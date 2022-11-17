@@ -13,6 +13,7 @@ from .permissions import IsAdmin
 from .serializers import (RegistrationSerializer, TokenSerializer,
                           UserSerializer)
 
+
 @api_view(['POST'])
 def get_token(request):
     serializer = TokenSerializer(data=request.data)
