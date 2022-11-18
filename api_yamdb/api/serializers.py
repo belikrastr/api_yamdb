@@ -46,7 +46,7 @@ class TokenSerializer(serializers.Serializer):
     """Сериализатор для получения токена.
     Зарезервированное имя использовать нельзя."""
     username = serializers.CharField(max_length=200, required=True)
-    confirmation_code = serializers.CharField(max_length=200, required=True)
+    confirmation_code = serializers.CharField(max_length=200, required=False)
 
     def validate_username(self, value):
         if value == RESERVED_NAME:
