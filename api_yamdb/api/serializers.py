@@ -43,8 +43,8 @@ class ForAdminSerializer(serializers.ModelSerializer):
 
 
 class TokenSerializer(serializers.Serializer):
-    """Сериализатор для получения токена.
-    Зарезервированное имя использовать нельзя."""
+    """Получение токена.
+    Зарезервированное имя "me" использовать нельзя."""
     username = serializers.CharField(max_length=200, required=True)
     confirmation_code = serializers.CharField(max_length=200, required=False)
 
