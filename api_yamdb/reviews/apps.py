@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class ReviewsConfig(AppConfig):
-    name = 'users'
+    name = 'reviews'
