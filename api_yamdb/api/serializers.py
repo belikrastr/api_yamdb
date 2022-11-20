@@ -9,7 +9,7 @@ from users.models import User
 
 class ForUserSerializer(serializers.ModelSerializer):
     """Сериализатор для пользователей со статусом user.
-    Зарезервированное имя использовать нельзя"""
+    Зарезервированное имя "me" использовать нельзя"""
     email = serializers.EmailField(required=True)
 
     class Meta:
@@ -27,7 +27,7 @@ class ForUserSerializer(serializers.ModelSerializer):
 
 class ForAdminSerializer(serializers.ModelSerializer):
     """Сериализатор для пользователей со статусом admin.
-    Зарезервированное имя использовать нельзя"""
+    Зарезервированное имя "me" использовать нельзя"""
     email = serializers.EmailField(
         validators=[UniqueValidator(queryset=User.objects.all())])
 
