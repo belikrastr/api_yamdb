@@ -22,12 +22,12 @@ def get_token(request):
         username = serializer.validated_data.get('username')
         confirmation_code = serializer.validated_data.get('confirmation_code')
         user = get_object_or_404(User, username=username)
-        if confirmation_code == user.confirmation_code:
-            token = RefreshToken.for_user(user)
-            token_data = {'token': str(token.access_token)}
-            return Response(token_data, status=status.HTTP_200_OK)
+        if user.confirmation_code != confirmation_code:
+            return Response({'token': 'incorrect'}, status=status.HTTP_400_BAD_REQUEST)
 
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        reset = resetrtoken.for_user(user)
+        access_token = str(reset.access_token)
+        return Response({"token": f"{access_token}"})
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
