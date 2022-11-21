@@ -23,7 +23,6 @@ class TitleFilter(django_filters.FilterSet):
         fields = '__all__'
 
 
-
 class ListCreateDestroyViewSet(mixins.ListModelMixin,
                                mixins.CreateModelMixin,
                                mixins.DestroyModelMixin,
