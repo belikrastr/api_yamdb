@@ -43,7 +43,6 @@ class Title(models.Model):
                                       message='год')],
         db_index=True,)
 
-
     description = models.TextField(verbose_name='описание')
 
     genre = models.ManyToManyField(Genre,
