@@ -23,7 +23,7 @@ def create_confirmation_code_and_send_email(username):
         subject='Confirmation code',
         message=f'Your confirmation code {confirmation_code}',
         from_email=DEFAULT_FROM_EMAIL,
-        recipient_list=['e@y.ru'])
+        recipient_list=[user.email])
 
 
 class APISignUp(APIView):
@@ -54,7 +54,7 @@ class APIToken(APIView):
             )
             token = AccessToken.for_user(user)
             return Response(
-                    {'token': str(token)}, status=status.HTTP_200_OK)
+                {'token': str(token)}, status=status.HTTP_200_OK)
         return Response({
             'confirmation code': 'Некорректный код подтверждения!'},
             status=status.HTTP_400_BAD_REQUEST)

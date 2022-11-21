@@ -8,7 +8,7 @@ from reviews.models import Category, Comment, Genre, Review, Title
 
 from .filters import TitleFilter, ListCreateDestroyViewSet
 
-from api.permissions import (IsAdmin, IsAuthorOrAdministratorOrReadOnly,
+from api.permissions import (IsAuthorOrAdministratorOrReadOnly,
                              IsAdminOrReadOnly)
 from .serializers import (CategorySerializer, CommentSerializer,
                           GenreSerializer, ReviewSerializer,
