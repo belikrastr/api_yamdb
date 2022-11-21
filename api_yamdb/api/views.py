@@ -8,7 +8,8 @@ from reviews.models import Category, Comment, Genre, Review, Title
 
 from .filters import TitleFilter, ListCreateDestroyViewSet
 
-from api.permissions import IsAdmin, IsAuthorOrAdministratorOrReadOnly
+from api.permissions import (IsAdmin, IsAuthorOrAdministratorOrReadOnly,
+                             IsAdminOrReadOnly)
 from .serializers import (CategorySerializer, CommentSerializer,
                           GenreSerializer, ReviewSerializer,
                           TitleCreateSerializer, TitleSerializer)
@@ -17,7 +18,7 @@ from .serializers import (CategorySerializer, CommentSerializer,
 class CategoryViewSet(ListCreateDestroyViewSet, viewsets.GenericViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = (IsAdmin, )
+    permission_classes = (IsAdminOrReadOnly, )
     pagination_class = LimitOffsetPagination
     filter_backends = (filters.SearchFilter,)
     search_fields = ('name',)
@@ -27,7 +28,7 @@ class CategoryViewSet(ListCreateDestroyViewSet, viewsets.GenericViewSet):
 class GenreViewSet(ListCreateDestroyViewSet, viewsets.GenericViewSet):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
-    permission_classes = (IsAdmin, )
+    permission_classes = (IsAdminOrReadOnly, )
     pagination_class = LimitOffsetPagination
     filter_backends = (filters.SearchFilter,)
     search_fields = ('=name',)
@@ -37,7 +38,7 @@ class GenreViewSet(ListCreateDestroyViewSet, viewsets.GenericViewSet):
 class TitleViewSet(viewsets.ModelViewSet):
 
     queryset = Title.objects.all().annotate(Avg('review__score'))
-    permission_classes = (IsAdmin, )
+    permission_classes = (IsAdminOrReadOnly,)
     filter_backends = (OrderingFilter, DjangoFilterBackend)
     ordering = ('name',)
     filterset_class = TitleFilter
