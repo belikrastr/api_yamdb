@@ -52,9 +52,12 @@ class APIToken(APIView):
             user = get_object_or_404(
                 User, username=serializer.data['username']
             )
-            token = AccessToken.for_user(user)
-            return Response(
-                {'token': str(token)}, status=status.HTTP_200_OK)
+            confirmation_code = serializer.validated_data['confirmation_code']
+            if default_token_generator.check_token(serializer.data['username'],
+                                                   confirmation_code):
+                token = AccessToken.for_user(user)
+                return Response(
+                    {'token': str(token)}, status=status.HTTP_200_OK)
         return Response({
             'confirmation code': 'Некорректный код подтверждения!'},
             status=status.HTTP_400_BAD_REQUEST)
