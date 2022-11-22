@@ -31,6 +31,12 @@ class TitleSerializer(serializers.ModelSerializer):
         source='review__score__avg', read_only=True
     )
 
+    def validate_year(self, value):
+        year_today = date.today().year
+        if value > year_today:
+            raise serializers.ValidationError('Неверный год!')
+        return value
+
     class Meta:
         model = Title
         fields = '__all__'

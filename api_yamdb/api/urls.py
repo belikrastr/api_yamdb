@@ -25,6 +25,5 @@ router.register('users', UserViewSetForAdmin, basename='users')
 
 urlpatterns = [
     path('v1/auth/', include('users.urls')),
-    path('v1/users/me/', APIUser.as_view(), name='me'),
     path('v1/', include(router.urls)),
 ]
