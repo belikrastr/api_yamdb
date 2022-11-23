@@ -39,10 +39,14 @@ class Title(models.Model):
 
     name = models.CharField(max_length=50, verbose_name='тайтл')
     year = models.PositiveSmallIntegerField(
-        validators=[MaxValueValidator(date.today().year,
-                                      message='год')],
+        validators=[
+            MaxValueValidator(
+                date.today().year,
+                message='Нельзя добавлять произведения, которые еще не вышли!'
+            ),
+            MinValueValidator(0, message='Отрицательный год!')
+        ],
         db_index=True,)
-
 
     description = models.TextField(verbose_name='описание')
 
