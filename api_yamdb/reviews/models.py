@@ -1,4 +1,4 @@
-from datetime import date
+from validators import validate_year
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
@@ -38,13 +38,7 @@ class Title(models.Model):
 
     name = models.CharField(max_length=50, verbose_name='тайтл')
     year = models.PositiveSmallIntegerField(
-        validators=[
-            MaxValueValidator(
-                date.today().year,
-                message='Нельзя добавлять произведения, которые еще не вышли!'
-            ),
-            MinValueValidator(0, message='Отрицательный год!')
-        ],
+        validators=[validate_year],
         db_index=True,
     )
 
