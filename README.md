@@ -8,10 +8,8 @@
 - Python 
 - Django 
 - Django REST Framework
-- Gunicorn
 - Nginx
 - Docker
-- Github-Actions
 - Postgresql
 - JWT Token
 
