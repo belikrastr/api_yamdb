@@ -33,10 +33,6 @@
     ```bash
     - pip install -r requirements.txt
     ```
-- Перейти в директорию yatube:
-    ```bash
-    - cd api_yamdb
-    ```
 - Выполнить миграции:
     ```bash
     - python manage.py migrate
