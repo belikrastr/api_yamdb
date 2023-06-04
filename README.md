@@ -8,48 +8,58 @@
 - Python 
 - Django 
 - Django REST Framework
-- PostgreSQL
+- Gunicorn
+- Nginx
+- Docker
+- Github-Actions
+- Postgresql
+- JWT Token
 
-### Запуск проекта локально:
+### Подготовка к запуску проекта
+- Склонировуйте репозиторий на локальную мшину
+```bash
+git git@github.com:belikrastr/api_yamdb.git
+```
+- Перейдите в директорию api_yamdb
+```bash
+cd api_yamdb
+```
 
-- Клонировать репозиторий и перейти в него в командной строке:
-    ```bash
-    - git@github.com:belikrastr/api_yamdb.git
-    ```
-    ```bash
-    - cd api_yamdb
-    ```
-- Cоздать и активировать виртуальное окружение:
-    ```bash
-    - python -m venv env
-    ```
-    ```bash
-    - source env/Scripts/activate
-    ```
-    ```bash
-    - python -m pip install --upgrade pip
-    ```
-- Установить зависимости из файла requirements.txt:
-    ```bash
-    - pip install -r requirements.txt
-    ```
-- Перейти в директорию yatube:
-    ```bash
-    - cd yatube
-    ```
-- Выполнить миграции:
-    ```bash
-    - python manage.py migrate
-    ```
-- Запустить проект:
-    ```bash
-    - python manage.py runserver
-    ```
-### Примеры запросов for Users:
+- Cоздайте .env файл в директории и впишите:
+```python
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+DB_HOST=db
+DB_PORT=5432
+```
+
+### Запуск проекта 
+- Запустите docker-compose:
+```bash
+docker-compose up -d --build
+```
+```bash
+docker-compose up
+```
+- Выполните миграции:
+```bash
+docker-compose exec backend python manage.py migrate
+```
+- Создайте суперпользователя:
+```bash
+docker-compose exec backend python manage.py createsuperuser
+```
+- Соберите статику:
+```bash
+docker-compose exec backend python manage.py collectstatic --no-input
+```
+### Примеры запросов к API.
 
 - Регистрация пользователя и получение confirmation_code
 ###
-POST http://127.0.0.1:8000/api/v1/auth/signup/
+POST http://localhost/api/v1/auth/signup/
 Content-Type: application/json
 ```js
 {
@@ -60,7 +70,7 @@ Content-Type: application/json
 
 - Получение токена пользователя
 ###
-POST http://127.0.0.1:8000/api/v1/auth/token/
+POST http://localhost/api/v1/auth/token/
 Content-Type: application/json
 ```js
 {
@@ -70,13 +80,13 @@ Content-Type: application/json
 ```
 - Получить данные своей учетной записи
 ###
-GET  http://127.0.0.1:8000/api/v1/users/me/
+GET  http://localhost/api/v1/users/me/
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY4OTQ4Njc1LCJqdGkiOiJjYmE4NGMzZGUzYjI0ODA5OTY3ZjJiODZiOTM2YjQzYiIsInVzZXJfaWQiOjV9.guSbTtW-YBKsmOYzwzE7xu0tPXQ7dMoI2YzbAi4ZSw8
 
 
 - Изменить данные своей учетной записи
 ###
-PATCH http://127.0.0.1:8000/api/v1/users/me/
+PATCH http://localhost/api/v1/users/me/
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY4ODA0ODU3LCJqdGkiOiIyZjEzZWMzZWM1MDU0ODI0OTU1ZmUwM2Y4MmE2NDU2NSIsInVzZXJfaWQiOjV9.bzQTBMpOjztnhLwo-rXGQXY7eqwzyX23XtqkMq0f22U
 Content-Type: application/json
 ```js
@@ -92,14 +102,14 @@ Content-Type: application/json
 
 - Получение списка всех пользователей с токеном Админа
 ###
-GET   http://127.0.0.1:8000/api/v1/users/
+GET   http://localhost/api/v1/users/
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY4ODc3NTUzLCJqdGkiOiJmOGI5NDNhMjY5Mjk0MWNkOGQzZmQyYzk4N2JlODljOSIsInVzZXJfaWQiOjJ9.rw69vzp1RU80K-2PHiGPjRVm3umj0cKCaAy5ulZ7xJc
 Content-Type: application/json
 
 
 - Получаем token admin
 ###
-POST http://127.0.0.1:8000/api/v1/auth/token/
+POST http://localhost/api/v1/auth/token/
 Content-Type: application/json
 ```js
 {
