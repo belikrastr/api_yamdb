@@ -104,3 +104,4 @@ Content-Type: application/json
 ```
 ### Автор проекта
 Беликов Владимир - [Telegram](https://t.me/belikrastr) - belikrastr@yandex.ru
+Project Link: [https://github.com/belikrastr/api_yamdb](https://github.com/belikrastr/api_yamdb)
