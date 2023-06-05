@@ -116,7 +116,9 @@ Content-Type: application/json
 ```
 ### Авторы проекта
 supersushichi - https://github.com/supersushichi
+
 DmitriySN - https://github.com/DmitriySN
+
 Беликов Владимир - [Telegram](https://t.me/belikrastr) - belikrastr@yandex.ru
 
 Project Link: [https://github.com/belikrastr/api_yamdb](https://github.com/belikrastr/api_yamdb)
